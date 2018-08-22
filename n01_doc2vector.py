@@ -8,7 +8,7 @@ stop_word_li = [i[:-1] for i in open('./data/stop_list.txt', 'r', encoding='utf-
 TaggededDocument = gensim.models.doc2vec.TaggedDocument
 
 
-def get_train():
+def get_train_data():
     with open("./data/doc2vec_corpus.txt", 'r', encoding='utf-8') as doc:
         train_docs = []
         for i, text in enumerate(doc):
@@ -42,6 +42,6 @@ def predict_doc():
 
 
 if __name__ == '__main__':
-    train_x = get_train()
+    train_x = get_train_data()
     train(train_x)
     predict_doc()
