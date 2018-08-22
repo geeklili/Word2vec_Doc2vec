@@ -12,6 +12,7 @@ from gensim.models.word2vec import Word2Vec
 
 
 # 用gensim去做word2vec的处理，用sklearn当中的SVM进行建模
+
 #  载入数据，做预处理(分词)，切分训练集与测试集, x: 分词后的文本列表，y:正向或者负向，1/0
 def load_file_and_preprocessing():
     neg = pd.read_excel('./data/pos_neg_data/neg.xls', header=None, index=None)
@@ -100,7 +101,6 @@ def get_data():
 
 
 # 训练svm模型
-
 def svm_train(train_vectors, train_y, test_vectors, test_y):
     clf = SVC(kernel='rbf', verbose=True)
     clf.fit(train_vectors, train_y)
@@ -109,7 +109,6 @@ def svm_train(train_vectors, train_y, test_vectors, test_y):
 
 
 # 构建待预测句子的向量
-
 def get_predict_vectors(words):
     n_dim = 300
     model = Word2Vec.load('./data/svm_data/w2v_model.pkl')
@@ -120,7 +119,6 @@ def get_predict_vectors(words):
 
 
 # 对单个句子进行情感判断
-
 def svm_predict(word_str):
     words = jieba.lcut(word_str)
     words_vectors = get_predict_vectors(words)
@@ -141,7 +139,7 @@ if __name__ == '__main__':
     svm_train(train_vector, Y_train, test_vector, Y_test)
 
     # 对输入句子情感进行判断
-    # string='电池充完了电连手机都打不开.简直烂的要命.真是金玉其外,败絮其中!连5号电池都不如'
-    # string='牛逼，好评'
+    # word='电池充完了电连手机都打不开.简直烂的要命.真是金玉其外,败絮其中!连5号电池都不如'
+    # word='牛逼，好评'
     word = '这手机真棒，从1米高的地方摔下去就坏了'
     svm_predict(word)
