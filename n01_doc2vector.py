@@ -1,3 +1,6 @@
+import warnings
+
+warnings.filterwarnings(action='ignore', category=UserWarning, module='gensim')
 import gensim
 import jieba
 from gensim.models.doc2vec import Doc2Vec, LabeledSentence
